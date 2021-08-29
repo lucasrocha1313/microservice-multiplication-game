@@ -2,8 +2,8 @@ package br.com.tonim.multiplication.challenge.services;
 
 import br.com.tonim.multiplication.challenge.DTOs.ChallengeAttemptDTO;
 import br.com.tonim.multiplication.challenge.domain.ChallengeAttempt;
+import br.com.tonim.multiplication.challenge.eventpub.ChallengeEventPub;
 import br.com.tonim.multiplication.challenge.repositories.ChallengeAttemptRepository;
-import br.com.tonim.multiplication.serviceclients.GamificationServiceClient;
 import br.com.tonim.multiplication.user.domain.User;
 import br.com.tonim.multiplication.user.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,7 +30,7 @@ class ChallengeServiceTest {
     @Mock
     private ChallengeAttemptRepository attemptRepository;
     @Mock
-    GamificationServiceClient gameClient;
+    ChallengeEventPub gameClient;
 
     @BeforeEach
     public void setUp() {

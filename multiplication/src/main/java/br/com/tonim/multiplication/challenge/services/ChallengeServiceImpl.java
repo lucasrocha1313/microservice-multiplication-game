@@ -2,8 +2,8 @@ package br.com.tonim.multiplication.challenge.services;
 
 import br.com.tonim.multiplication.challenge.DTOs.ChallengeAttemptDTO;
 import br.com.tonim.multiplication.challenge.domain.ChallengeAttempt;
+import br.com.tonim.multiplication.challenge.eventpub.ChallengeEventPub;
 import br.com.tonim.multiplication.challenge.repositories.ChallengeAttemptRepository;
-import br.com.tonim.multiplication.serviceclients.GamificationServiceClient;
 import br.com.tonim.multiplication.user.domain.User;
 import br.com.tonim.multiplication.user.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -18,10 +18,10 @@ public class ChallengeServiceImpl implements ChallengeService {
 
     private final UserRepository userRepository;
     private final ChallengeAttemptRepository attemptRepository;
-    private final GamificationServiceClient gameClient;
+    private final ChallengeEventPub gameClient;
 
     public ChallengeServiceImpl(UserRepository userRepository, ChallengeAttemptRepository attemptRepository,
-                                GamificationServiceClient gameClient) {
+                                ChallengeEventPub gameClient) {
         this.userRepository = userRepository;
         this.gameClient = gameClient;
         this.attemptRepository = attemptRepository;
@@ -51,8 +51,8 @@ public class ChallengeServiceImpl implements ChallengeService {
         );
 
         var storedAttempt = attemptRepository.save(checkedAttempt);
-        var status = gameClient.sendAttempt(storedAttempt);
-        log.info("Gamification service response: {}", status);
+        gameClient.challengeSolved(storedAttempt);
+        log.info("Attempt of user {} sent to queue", storedAttempt.getUser());
         return storedAttempt;
     }
 
