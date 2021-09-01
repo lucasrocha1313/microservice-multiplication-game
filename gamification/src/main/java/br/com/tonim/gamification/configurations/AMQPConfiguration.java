@@ -11,6 +11,8 @@ import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.handler.annotation.support.DefaultMessageHandlerMethodFactory;
 import org.springframework.messaging.handler.annotation.support.MessageHandlerMethodFactory;
 
+import java.time.Duration;
+
 @Configuration
 public class AMQPConfiguration {
     @Bean
@@ -20,7 +22,10 @@ public class AMQPConfiguration {
 
     @Bean
     public Queue gamificationQueue (@Value("${amqp.queue.gamification}") final String queueName) {
-        return QueueBuilder.durable(queueName).build();
+        return QueueBuilder.durable(queueName)
+                .ttl((int) Duration.ofHours(6).toMillis())
+                .maxLength(25000)
+                .build();
     }
 
     @Bean
