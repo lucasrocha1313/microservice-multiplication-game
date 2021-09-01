@@ -1,6 +1,6 @@
 package br.com.tonim.gamification.game.services;
 
-import br.com.tonim.gamification.challenge.DTOs.ChallengeSolvedDTO;
+import br.com.tonim.gamification.challenge.DTOs.ChallengeSolvedEvent;
 import br.com.tonim.gamification.game.badgeprocessors.BadgeProcessor;
 import br.com.tonim.gamification.game.domain.BadgeCard;
 import br.com.tonim.gamification.game.domain.BadgeType;
@@ -31,7 +31,7 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public GameResult newAttemptForUser(ChallengeSolvedDTO challenge) {
+    public GameResult newAttemptForUser(ChallengeSolvedEvent challenge) {
         if (challenge.isCorrect()) {
             ScoreCard scoreCard = new ScoreCard(challenge.getUserId(),
                     challenge.getAttemptId());
@@ -52,7 +52,7 @@ public class GameServiceImpl implements GameService {
         }
     }
 
-    private List<BadgeCard> processForBadges(ChallengeSolvedDTO solvedChallenge) {
+    private List<BadgeCard> processForBadges(ChallengeSolvedEvent solvedChallenge) {
         var optTotalScore = scoreRepository.getTotalScoreForUser(solvedChallenge.getUserId());
         if (optTotalScore.isEmpty()) return Collections.emptyList();
         int totalScore = optTotalScore.get();

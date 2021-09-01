@@ -1,6 +1,6 @@
 package br.com.tonim.gamification.game.badgeprocessors;
 
-import br.com.tonim.gamification.challenge.DTOs.ChallengeSolvedDTO;
+import br.com.tonim.gamification.challenge.DTOs.ChallengeSolvedEvent;
 import br.com.tonim.gamification.game.domain.BadgeType;
 import br.com.tonim.gamification.game.domain.ScoreCard;
 import org.springframework.stereotype.Component;
@@ -12,7 +12,7 @@ import java.util.Optional;
 public class LuckyNumberBadgeProcessor implements BadgeProcessor{
     private static final int LUCKY_FACTOR = 42;
     @Override
-    public Optional<BadgeType> processForOptionalBadge(int currentScore, List<ScoreCard> scoreCardList, ChallengeSolvedDTO solved) {
+    public Optional<BadgeType> processForOptionalBadge(int currentScore, List<ScoreCard> scoreCardList, ChallengeSolvedEvent solved) {
         return solved.getFactorA() == LUCKY_FACTOR || solved.getFactorB() == LUCKY_FACTOR ? Optional.of(BadgeType.LUCKY_NUMBER): Optional.empty();
     }
 

@@ -3,7 +3,7 @@ package br.com.tonim.gamification.challenge.DTOs;
 import lombok.Value;
 
 @Value
-public class ChallengeSolvedDTO {
+public class ChallengeSolvedEvent {
     long attemptId;
     boolean correct;
     int factorA;
