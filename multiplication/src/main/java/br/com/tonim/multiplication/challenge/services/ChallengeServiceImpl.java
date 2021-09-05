@@ -9,6 +9,7 @@ import br.com.tonim.multiplication.user.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Locale;
 
@@ -28,6 +29,7 @@ public class ChallengeServiceImpl implements ChallengeService {
     }
 
     @Override
+    @Transactional
     public ChallengeAttempt verifyAttempt(ChallengeAttemptDTO attemptDTO) {
         var userAliasLowerCase = attemptDTO.getUserAlias().toLowerCase(Locale.ROOT);
         var user = userRepository.findByAlias(userAliasLowerCase)
