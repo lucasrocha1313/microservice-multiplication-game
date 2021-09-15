@@ -15,7 +15,7 @@ spring:
             - Path=/leaders
       globalcors:
         cors-configurations:
-          '[**]':
+          '[/**]':
             allowedOrigins: "http://localhost:3000"
             allowedHeaders:
               - "*"
@@ -23,3 +23,7 @@ spring:
               - "GET"
               - "POST"
               - "OPTIONS"
+
+#logging:
+#  level:
+#    org.springframework.cloud.gateway.handler.predicate: trace
