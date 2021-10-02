@@ -5,8 +5,9 @@ spring:
   application:
     name: gateway
   cloud:
-    ribbon:
-      enabled: false
+    loadbalancer:
+      ribbon:
+        enabled: false
     consul:
       enabled: true
       discovery:
