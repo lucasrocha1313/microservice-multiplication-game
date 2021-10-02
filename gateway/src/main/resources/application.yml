@@ -38,6 +38,6 @@ spring:
             retries: 3
             methods: GET, POST
 
-#logging:
-#  level:
-#    org.springframework.cloud.gateway.handler.predicate: trace
+logging:
+  level:
+    org.springframework.amqp.rabbit.connection.CachingConnectionFactory: WARN
